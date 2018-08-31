@@ -80,7 +80,7 @@ def sections(request):
 
 
 def section(request, section_name):
-    vehiclepart_list = VehiclePart.objects.filter(section__name=section_name)
+    vehiclepart_list = VehiclePart.objects.filter(section__name=section_name).order_by('-price')
     return render(request, 'web_car/section.html', {
         'section_name': section_name,
         'vehiclepart_list': vehiclepart_list,
