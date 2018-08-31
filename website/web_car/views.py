@@ -1,6 +1,6 @@
 from django.contrib import messages
-from django.shortcuts import render, render_to_response
-from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, render_to_response, get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 from .models import VehiclePart, Section
@@ -60,7 +60,9 @@ def add_section(request):
 
 
 def edit_section(request, section_id):
-    section = Section.objects.get(id=section_id)
+    section = get_object_or_404(Section, id=section_id)
+    if request.user != section.user:
+        return HttpResponseNotFound()
     if request.method == 'POST':
         form = SectionForm(request.POST, instance=section)
         if form.is_valid():
@@ -78,7 +80,9 @@ def edit_section(request, section_id):
 
 
 def edit_vehiclepart(request, vehiclepart_id):
-    vehiclepart = VehiclePart.objects.get(id=vehiclepart_id)
+    vehiclepart = get_object_or_404(VehiclePart, id=vehiclepart_id)
+    if request.user != vehiclepart.user:
+        return HttpResponseNotFound()
     if request.method == 'POST':
         form = VehiclePartForm(request.POST, instance=vehiclepart)
         if form.is_valid():
