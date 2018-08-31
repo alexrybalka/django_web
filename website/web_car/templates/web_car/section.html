@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ section_name }}</title>
+</head>
+<body>
+<h2><i>Vehicle parts in section {{ section_name }} available now:</i></h2>
+<p>[<i><a href="/add_vehiclepart/">Add your vehicle part here</a></i>]</p>
+{% if vehiclepart_list %}
+<ul>
+    {% for vehiclepart in vehiclepart_list %}
+    <li>
+        <b>{{ vehiclepart }}</b>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No vehicle part is available now. Please come tomorrow!</p>
+{% endif %}
+</body>
+</html>

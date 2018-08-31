@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Top-Priced</title>
+</head>
+<body>
+<h2>TOP 5 most priced vehicle parts:</h2>
+<ul>
+    {% for vehiclepart in priciest_vehiclepart_list %}
+    <li>Name: {{ vehiclepart.name }}, price: {{ vehiclepart.price }}</li>
+    {% endfor %}
+</ul>
+</body>
+</html>

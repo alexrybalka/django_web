@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sections</title>
+</head>
+<body>
+{% include "web_car/messages.html" %}
+<h2><i>List of sections available:</i></h2>
+<p>[<i><a href="/add_section/">Add your section here</a></i>]</p>
+<h4>Here you can reach your section faster:</h4>
+{% if section_list %}
+<ul>
+    {% for section in section_list %}
+    <li name="{{ section.name }}">
+        <a href="#{{ section.name }}">{{ section.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+<ul>
+    {% for section in section_list %}
+    <li>
+        <a name="{{ section.name }}"></a>
+        <p>Name:
+            <a href="{% url 'section' section.name %}">{{ section.name }}</a>
+            <i> <- Click here to check vehicle parts in this section</i>
+        </p>
+        <i>Description:</i>
+        <p>{{ section.description }}</p>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No section is available.</p>
+{% endif %}
+</body>
+</html>

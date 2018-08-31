@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Messages</title>
+</head>
+<body>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <center>
+        <p>
+        <h3>GOOD JOB!</h3>
+        </p>
+        <h4>{{ message }}</h4>
+    </center>
+    {% endfor %}
+</ul>
+{% endif %}
+</body>
+</html>
