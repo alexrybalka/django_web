@@ -59,6 +59,43 @@ def add_section(request):
     })
 
 
+def edit_section(request, section_id):
+    section = Section.objects.get(id=section_id)
+    if request.method == 'POST':
+        form = SectionForm(request.POST, instance=section)
+        if form.is_valid():
+            inst = form.save()
+            inst.user = request.user
+            inst.save()
+            messages.add_message(request, messages.INFO,
+                                 f"Section {inst.name} was edited successfully")
+            return HttpResponseRedirect('/sections/')
+    else:
+        form = SectionForm(instance=section)
+    return render(request, 'web_car/add_section.html', {
+        'form': form
+    })
+
+
+def edit_vehiclepart(request, vehiclepart_id):
+    vehiclepart = VehiclePart.objects.get(id=vehiclepart_id)
+    if request.method == 'POST':
+        form = VehiclePartForm(request.POST, instance=vehiclepart)
+        if form.is_valid():
+            inst = form.save()
+            inst.user = request.user
+            inst.save()
+            messages.add_message(request,
+                                 messages.INFO,
+                                 f"Vehicle Part {inst.name} was edited successfully")
+            return HttpResponseRedirect('/sections/')
+    else:
+        form = VehiclePartForm(instance=vehiclepart)
+    return render(request, 'web_car/add_vehiclepart.html', {
+        'form': form
+    })
+
+
 def add_vehiclepart(request):
     if request.method == 'POST':
         form = VehiclePartForm(request.POST)

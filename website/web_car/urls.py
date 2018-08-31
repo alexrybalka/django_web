@@ -11,5 +11,9 @@ urlpatterns = [
     path('add_vehiclepart/', views.add_vehiclepart, name='add-new-vehiclepart'),
     path('top-priced/', views.top_priced, name='top-priced'),
     path('sections/<str:section_name>/', views.section, name='section'),
+    path('section/edit/<int:section_id>', views.edit_section,
+         name='edit-section'),
+    path('vehiclepart/edit/<int:vehiclepart_id>', views.edit_vehiclepart,
+         name='edit_vehiclepart'),
     path('sections/', views.sections, name='sections'),
 ]
