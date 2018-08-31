@@ -4,7 +4,7 @@ from django.db import models
 
 class VehiclePart(models.Model):
     name = models.CharField(max_length=200)
-    price = models.DecimalField(max_digits=15, decimal_places=2, default=0)
+    price = models.DecimalField(max_digits=15, decimal_places=2, default='0.00')
     description = models.TextField(max_length=1000,
                                    default='Add some description')
     pub_date = models.DateTimeField(
