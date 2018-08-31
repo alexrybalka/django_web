@@ -1,5 +1,7 @@
 from datetime import datetime
+
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class VehiclePart(models.Model):
@@ -13,6 +15,9 @@ class VehiclePart(models.Model):
         'Section',
         on_delete=models.CASCADE,
     )
+    user = models.ForeignKey('auth.User',
+                             null=True, blank=True,
+                             on_delete=models.SET_NULL)
 
     def __str__(self):
         return "{}: price - {} USD. Published at: {}. Section: {}".format(
@@ -24,6 +29,9 @@ class Section(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(max_length=1000,
                                    default='Add some description')
+    user = models.ForeignKey('auth.User',
+                             null=True, blank=True,
+                             on_delete=models.SET_NULL)
 
     def __str__(self):
         return f"{self.name}: {self.description[:5]}..."

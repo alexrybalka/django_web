@@ -47,6 +47,8 @@ def add_section(request):
         form = SectionForm(request.POST)
         if form.is_valid():
             inst = form.save()
+            inst.user = request.user
+            inst.save()
             messages.add_message(request, messages.INFO,
                                  f"Section {inst.name} was created successfully")
             return HttpResponseRedirect('/sections/')
@@ -62,6 +64,8 @@ def add_vehiclepart(request):
         form = VehiclePartForm(request.POST)
         if form.is_valid():
             inst = form.save()
+            inst.user = request.user
+            inst.save()
             messages.add_message(request,
                                  messages.INFO,
                                  f"Vehicle Part {inst.name} was created successfully")
