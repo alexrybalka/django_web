@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search result</title>
+</head>
+<body>
+{% if vehicleparts %}
+<ul>
+    {% for vehiclepart in vehicleparts %}
+    <li>
+        <b>{{ vehiclepart }}</b>
+
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No vehicle part founded by this search.
+    Try another or <i><a href="/add_vehiclepart/">add here</a></i>!</p>
+{% endif %}
+</body>
+</html>
