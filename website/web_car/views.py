@@ -1,8 +1,39 @@
 from django.contrib import messages
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.shortcuts import render, render_to_response
+from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+
 from .models import VehiclePart, Section
 from .forms import SectionForm, VehiclePartForm
+
+
+def register(request):
+    form = UserCreationForm()
+    if request.method == 'POST':
+        data = request.POST.copy()
+        errors = form.get_validation_errors(data)
+        if not errors:
+            new_user = form.save(data)
+            messages.add_message(request, messages.INFO,
+                                 f"Congrats! {new_user.username} was logined successfully")
+            return HttpResponseRedirect('/')
+    else:
+        return render_to_response("registration/register.html", {
+        'form': form
+    })
+
+def auth(request):
+    if request.method == 'POST':
+        form = AuthenticationForm()
+        if form.is_valid():
+            messages.add_message(request, messages.INFO,
+                                 f"Congrats! {inst.username} was logined successfully")
+            return HttpResponseRedirect('/')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'web_car/auth.html', {
+        'form': form
+    })
 
 
 def index(request):

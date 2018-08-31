@@ -4,8 +4,14 @@
     <meta charset="UTF-8">
     <title>Main Page</title>
 </head>
-<body>
-<h3>Hello, world. You're at the best car showroom ever. Congrats!</h3>
+<a href="{% url "register" %}">Register</a>
+{% if user.is_authenticated %}
+<h3>Hey, {{user}}! You're at the best car showroom ever. Congrats!</h3>
+<a href="{% url "logout" %}">Logout</a>
+{% else %}
+<h3>Hello, world! You're at the best car showroom ever. Congrats!</h3>
+<a href="{% url "login" %}">Login</a>
+{% endif %}
 <h4>Description</h4>
 <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
     Sed feugiat risus quis ex mattis, in sagittis augue ullamcorper.
