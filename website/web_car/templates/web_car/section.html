@@ -9,7 +9,7 @@
 <p>[<i><a href="/add_vehiclepart/">Add your vehicle part here</a></i>]</p>
 {% if vehiclepart_list %}
 <ul>
-    {% for vehiclepart in vehiclepart_list %}
+    {% for vehiclepart in vehiclepart_list.object_list %}
     <li>
         <b>{{ vehiclepart }}</b>
     </li>
