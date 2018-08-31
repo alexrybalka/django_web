@@ -1,41 +1,32 @@
 from django.contrib import messages
-from django.shortcuts import render, render_to_response, get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import UserCreationForm
 from django.core.paginator import Paginator
+from django.contrib.auth.views import LoginView
 
 from .models import VehiclePart, Section
 from .forms import SectionForm, VehiclePartForm
 
 
 def register(request):
-    form = UserCreationForm()
     if request.method == 'POST':
-        data = request.POST.copy()
-        errors = form.get_validation_errors(data)
-        if not errors:
-            new_user = form.save(data)
-            messages.add_message(request, messages.INFO,
-                                 f"Congrats! {new_user.username} was registered successfully")
-            return HttpResponseRedirect('/')
-    else:
-        return render_to_response("registration/register.html", {
-            'form': form
-        })
-
-
-def auth(request):
-    if request.method == 'POST':
-        form = AuthenticationForm()
+        form = UserCreationForm(request.POST)
         if form.is_valid():
+            inst = form.save()
+            inst.user = request.user
+            inst.save()
             messages.add_message(request, messages.INFO,
-                                 f"Congrats! {inst.username} was logined successfully")
-            return HttpResponseRedirect('/')
+                                 f"Congrats! {inst.username} was registered successfully")
+            return HttpResponseRedirect("/")
+        else:
+            return render(request, "registration/register.html", {
+                'form': form
+            })
     else:
-        form = AuthenticationForm()
-    return render(request, 'web_car/auth.html', {
-        'form': form
-    })
+        return render(request, "registration/register.html", {
+            'form': UserCreationForm()
+        })
 
 
 def index(request):
