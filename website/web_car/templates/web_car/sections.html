@@ -18,7 +18,7 @@
     {% endfor %}
 </ul>
 <ul>
-    {% for section in section_list %}
+    {% for section in section_list.object_list %}
     <li>
         <a name="{{ section.name }}"></a>
         <p>Name:
@@ -33,5 +33,10 @@
 {% else %}
 <p>No section is available.</p>
 {% endif %}
+<div>
+    {% for i in paginator.page_range %}
+    <t><a href="/sections/?page={{i}}">{{i}}</a></t>
+    {% endfor %}
+</div>
 </body>
 </html>

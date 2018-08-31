@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render, render_to_response, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.core.paginator import Paginator
 
 from .models import VehiclePart, Section
 from .forms import SectionForm, VehiclePartForm
@@ -15,12 +16,13 @@ def register(request):
         if not errors:
             new_user = form.save(data)
             messages.add_message(request, messages.INFO,
-                                 f"Congrats! {new_user.username} was logined successfully")
+                                 f"Congrats! {new_user.username} was registered successfully")
             return HttpResponseRedirect('/')
     else:
         return render_to_response("registration/register.html", {
-        'form': form
-    })
+            'form': form
+        })
+
 
 def auth(request):
     if request.method == 'POST':
@@ -118,14 +120,26 @@ def add_vehiclepart(request):
     })
 
 
+def search(request):
+    if 'search' in request.GET:
+        vehicleparts = VehiclePart.objects.filter(
+            name__contain=request.GET['search'])
+    return render(request, 'web_car/results.html', {
+        'vehicleparts': vehicleparts,
+    })
+
+
 def sections(request):
+    p = Paginator(object_list=Section.objects.all(), per_page=5)
     return render(request, 'web_car/sections.html', {
-        'section_list': Section.objects.all(),
+        'section_list': p.page(request.GET.get('page', 1)),
+        'paginator': p,
     })
 
 
 def section(request, section_name):
-    vehiclepart_list = VehiclePart.objects.filter(section__name=section_name).order_by('-price')
+    vehiclepart_list = VehiclePart.objects.filter(
+        section__name=section_name).order_by('-price')
     return render(request, 'web_car/section.html', {
         'section_name': section_name,
         'vehiclepart_list': vehiclepart_list,
