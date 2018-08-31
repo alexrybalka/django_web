@@ -18,5 +18,10 @@
 {% else %}
 <p>No vehicle part is available now. Please come tomorrow!</p>
 {% endif %}
+<div>
+    {% for i in paginator.page_range %}
+    <t><a href="/sections/{{ section_name }}/?page={{i}}">{{i}}</a></t>
+    {% endfor %}
+</div>
 </body>
 </html>

@@ -140,9 +140,11 @@ def sections(request):
 def section(request, section_name):
     vehiclepart_list = VehiclePart.objects.filter(
         section__name=section_name).order_by('-price')
+    p = Paginator(vehiclepart_list, per_page=2)
     return render(request, 'web_car/section.html', {
         'section_name': section_name,
-        'vehiclepart_list': vehiclepart_list,
+        'paginator': p,
+        'vehiclepart_list': p.page(request.GET.get('page', 1)),
     })
 
 
