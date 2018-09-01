@@ -26,15 +26,30 @@
 </h5>
 <center><img src="https://dailym.ai/2Led0St"/></center>
 <p><i><a href="/top-priced/">[TOP 5 MOST PRICED]</a></i>
-<p>You can view all available sections <i><a href="/sections/">here</a></i>
+{% if user.is_authenticated %}
+    <p>You can view all available sections <i><a href="/sections/">here</a></i>
     or create your own section <i><a href="/add_section/">here</a></i>
 </p>
+{% else %}
+<p>You can view all available sections <i><a href="/sections/">here</a></i>
+    or create your own section <i><a href="{% url "login" %}">here</a></i>
+    <b>, but login first.</b>
+</p>
+{% endif %}
 {% if amount_vehiclepart %}
-<p>Amount of the vehicle parts available now: <b>{{ amount_vehiclepart }}</b>
+<p>Amount of the vehicle parts available now:
+    <i><b>{{ amount_vehiclepart }}</b></i>
 </p>
 {% else %}
-<p>No vehicle parts are available.</p>
+<p>No vehicle parts are available now.</p>
 {% endif %}
-Add your own vehicle part <i><a href="/add_vehiclepart/">here</a></i>
+{% if user.is_authenticated %}
+    <p>Add your own vehicle part <i><a href="/add_vehiclepart/">here</a></i></p>
+{% else %}
+<p>Add your own vehicle part <i><a href="{% url "login" %}">here</a></i>
+    <b>, but login first.</b>
+</p>
+{% endif %}
+<a href="{% url "logout" %}">Logout</a>
 </body>
 </html>
