@@ -7,7 +7,7 @@
 <body>
 {% include "web_car/messages.html" %}
 <h2><i>List of sections available:</i></h2>
-<p>[<i><a href="/add_section/">Add your section here</a></i>]</p>
+<p>[<i><a href="/add_section/">Add your custom section</a></i>]</p>
 <h4>Here you can reach your section faster:</h4>
 {% if section_list %}
 <ul>
@@ -21,9 +21,11 @@
     {% for section in section_list.object_list %}
     <li>
         <a name="{{ section.name }}"></a>
-        <p>Name:
-            <a href="{% url 'section' section.name %}">{{ section.name }}</a>
-            <i> <- Click here to check vehicle parts in this section</i>
+        <p>Name: {{ section.name }}
+            <i>[Click <a href="{% url 'section' section.name %}">here</a>
+                to see vehicle parts in this section or</i>
+            <a href="{% url 'edit-section' section.id %}">here to edit</a>
+            this section]
         </p>
         <i>Description:</i>
         <p>{{ section.description }}</p>

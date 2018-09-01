@@ -57,7 +57,7 @@ def add_section(request):
 def edit_section(request, section_id):
     section = get_object_or_404(Section, id=section_id)
     if request.user != section.user:
-        return HttpResponseNotFound()
+        return HttpResponse("You can not edit section you wasn't add")
     if request.method == 'POST':
         form = SectionForm(request.POST, instance=section)
         if form.is_valid():
@@ -70,7 +70,8 @@ def edit_section(request, section_id):
     else:
         form = SectionForm(instance=section)
     return render(request, 'web_car/add_section.html', {
-        'form': form
+        'form': form,
+        'section_id': section_id,
     })
 
 
@@ -78,7 +79,7 @@ def edit_section(request, section_id):
 def edit_vehiclepart(request, vehiclepart_id):
     vehiclepart = get_object_or_404(VehiclePart, id=vehiclepart_id)
     if request.user != vehiclepart.user:
-        return HttpResponseNotFound()
+        return HttpResponse("You can not edit vehicle part you wasn't add")
     if request.method == 'POST':
         form = VehiclePartForm(request.POST, instance=vehiclepart)
         if form.is_valid():
@@ -92,7 +93,9 @@ def edit_vehiclepart(request, vehiclepart_id):
     else:
         form = VehiclePartForm(instance=vehiclepart)
     return render(request, 'web_car/add_vehiclepart.html', {
-        'form': form
+        'form': form,
+        'vehiclepart_id': vehiclepart_id,
+        'is_section': any(Section.objects.all()),
     })
 
 
