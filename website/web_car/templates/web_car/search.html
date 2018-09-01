@@ -5,10 +5,10 @@
     <title>Search</title>
 </head>
 <body>
-<form method="get" action="{% url 'search-result' %}" role="search" >
+<form method="get" action="{% url 'search-result' %}">
     <input name="search" type="text"
     placeholder="{{request.GET.search|default:"Enter vehiclepart name here..."}}">
-    <button type="submit">Search</button>
+    <button type="submit">Search vehicle parts</button>
 </form>
 </body>
 </html>

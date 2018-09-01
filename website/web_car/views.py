@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.contrib.auth.forms import UserCreationForm
 from django.core.paginator import Paginator
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.decorators import login_required
 
 from .models import VehiclePart, Section
 from .forms import SectionForm, VehiclePartForm
@@ -35,6 +35,7 @@ def index(request):
     })
 
 
+@login_required
 def add_section(request):
     if request.method == 'POST':
         form = SectionForm(request.POST)
@@ -52,6 +53,7 @@ def add_section(request):
     })
 
 
+@login_required
 def edit_section(request, section_id):
     section = get_object_or_404(Section, id=section_id)
     if request.user != section.user:
@@ -72,6 +74,7 @@ def edit_section(request, section_id):
     })
 
 
+@login_required
 def edit_vehiclepart(request, vehiclepart_id):
     vehiclepart = get_object_or_404(VehiclePart, id=vehiclepart_id)
     if request.user != vehiclepart.user:
@@ -93,6 +96,7 @@ def edit_vehiclepart(request, vehiclepart_id):
     })
 
 
+@login_required
 def add_vehiclepart(request):
     if request.method == 'POST':
         form = VehiclePartForm(request.POST)
@@ -112,9 +116,11 @@ def add_vehiclepart(request):
 
 
 def search(request):
-    if 'search' in request.GET:
+    if 'search' in request.GET and len(request.GET['search']):
         vehicleparts = VehiclePart.objects.filter(
             name__contains=request.GET['search'])
+    else:
+        return HttpResponseRedirect('/')
     return render(request, 'web_car/results.html', {
         'vehicleparts': vehicleparts,
     })
