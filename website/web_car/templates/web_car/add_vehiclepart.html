@@ -5,6 +5,8 @@
     <title>Add Your Vehicle Part</title>
 </head>
 <body>
+
+{% if section %}
 <p><i>Please, add your vehicle part data here:<br>
     Enter published date (Pub date) like this: '2006-10-25 14:30'</i></p>
 <form method="post"> {% csrf_token %}
@@ -13,5 +15,9 @@
     </table>
     <input type="submit" value="Submit">
 </form>
+{% else %}
+<p>There is no section created yet. Please, create section
+    <i><a href="/add_section/">here</a></i></p>
+{% endif %}
 </body>
 </html>
