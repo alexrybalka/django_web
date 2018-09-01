@@ -4,7 +4,7 @@ from django.contrib.auth.views import LoginView
 from . import views
 
 urlpatterns = [
-    path('results/', views.search, name='vehicleparts-search'),
+    path('results/', views.search, name='search-result'),
     path('register/', views.register, name='register'),
     path('', views.index, name='index'),
     path('add_section/', views.add_section, name='add-new-section'),

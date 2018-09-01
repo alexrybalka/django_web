@@ -114,7 +114,7 @@ def add_vehiclepart(request):
 def search(request):
     if 'search' in request.GET:
         vehicleparts = VehiclePart.objects.filter(
-            name__contain=request.GET['search'])
+            name__contains=request.GET['search'])
     return render(request, 'web_car/results.html', {
         'vehicleparts': vehicleparts,
     })
