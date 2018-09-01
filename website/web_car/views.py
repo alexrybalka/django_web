@@ -111,7 +111,8 @@ def add_vehiclepart(request):
     else:
         form = VehiclePartForm()
     return render(request, 'web_car/add_vehiclepart.html', {
-        'form': form
+        'form': form,
+        'is_section': any(Section.objects.all()),
     })
 
 
