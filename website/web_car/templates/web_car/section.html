@@ -21,7 +21,8 @@
     {% endfor %}
 </ul>
 {% else %}
-<p>No vehicle part is available now. Please come tomorrow!</p>
+<p>No vehicle part is available now. Please come tomorrow or create your own
+    <i><a href="/add_vehiclepart/">here</a></i>!</p>
 {% endif %}
 <div>
     {% for i in paginator.page_range %}

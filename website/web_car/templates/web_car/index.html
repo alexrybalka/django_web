@@ -36,7 +36,7 @@
 {% else %}
 <p>You can view all available sections <i><a href="/sections/">here</a></i>
     or create your own section <i><a href="{% url "login" %}">here</a></i>,
-    <b> but login first.</b>
+    <b> but <a href="{% url "login" %}">login</a></i> first.</b>
 </p>
 {% endif %}
 {% if amount_vehiclepart %}
@@ -57,9 +57,14 @@
     <p>Add your own vehicle part <i><a href="/add_vehiclepart/">here</a></i></p>
 {% else %}
 <p>Create your own vehicle part <i><a href="{% url "login" %}">here</a></i>,
-    <b> but login first.</b>
+    <b> but <a href="{% url "login" %}">login</a></i> first.</b>
 </p>
 {% endif %}
-<a href="{% url "logout" %}">Logout</a>
+{% if user.is_authenticated %}
+    <a href="{% url "logout" %}">Logout</a>
+{% else %}
+<a href="{% url "login" %}">Login</a>
+</p>
+{% endif %}
 </body>
 </html>

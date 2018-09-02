@@ -7,9 +7,29 @@
 <body>
 <h2>TOP 5 most priced vehicle parts:</h2>
 <ul>
+{% if priciest_vehiclepart_list %}
     {% for vehiclepart in priciest_vehiclepart_list %}
     <li>Name: {{ vehiclepart.name }}, price: {{ vehiclepart.price }}</li>
     {% endfor %}
+    {% if user.is_authenticated %}
+    <p>Want to see your vehicle part here? You can create it <i>
+        <a href="/add_vehiclepart/">here</a></i></p>
+    {% else %}
+    <p>You can create your own vehicle part <i>
+        <a href="{% url "login" %}">here</a></i>, <b> but
+        <a href="{% url "login" %}">login</a></i> first.</b></p>
+    {% endif %}
+{% else %}
+    <p>Sorry, there is no vehicle parts yet.</p>
+    {% if user.is_authenticated %}
+    <p>Want to see your vehicle part here? You can create it <i>
+        <a href="/add_vehiclepart/">here</a></i></p>
+    {% else %}
+    <p>You can create your own vehicle part <i>
+        <a href="{% url "login" %}">here</a></i>, <b> but <i>
+        <a href="{% url "login" %}">login</a></i> first.</b></p>
+    {% endif %}
+{% endif %}
 </ul>
 </body>
 </html>
