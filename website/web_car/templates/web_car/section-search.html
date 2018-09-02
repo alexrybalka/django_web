@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Section Search Results</title>
+</head>
+<body>
+{% if sections %}
+<h4>RESULTS:</h4>
+<ul>
+    {% for section in sections %}
+    <li>
+        <b>{{ section }}</b>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No section founded by this search.
+    Try another search <a href="/">here</a> or <i>
+        <a href="/add_section/">add section here</a></i>!</p>
+{% endif %}
+</body>
+</html>
