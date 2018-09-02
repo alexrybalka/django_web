@@ -7,7 +7,7 @@
 <body>
 <form method="get" action="{% url 'vehiclepart-search-result' %}">
     <input name="vehiclepart_search" type="text"
-    placeholder="{{request.GET.vehiclepart_search|default:"Enter vehiclepart name here..."}}">
+    placeholder="{{request.GET.vehiclepart_search|default:"Enter vehiclepart name here"}}">
     <button type="submit">Search vehicle parts</button>
 </form>
 </body>

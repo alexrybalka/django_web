@@ -7,7 +7,7 @@
 <body>
 <form method="get" action="{% url 'section-search-result' %}">
     <input name="section_search" type="text"
-    placeholder="{{request.GET.section_search|default:"Enter section name here..."}}">
+    placeholder="{{request.GET.section_search|default:"Enter section name here"}}">
     <button type="submit">Search sections</button>
 </form>
 </body>
