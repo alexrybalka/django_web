@@ -22,8 +22,8 @@
         <li>List of sections</li>
         <li>Adding sections & vehicle parts (user add only)</li>
         <li>Editing sections & vehicle parts (user add only and depends on which user added item)</li>
-        <li>Vehicle parts search</li>
-        <li>Vehicle parts counter</li>
+        <li>Vehicle parts & sections search</li>
+        <li>Vehicle parts & sections counter</li>
     </ul>
 </h5>
 <center><img src="https://dailym.ai/2Led0St"/></center>
@@ -34,8 +34,8 @@
 </p>
 {% else %}
 <p>You can view all available sections <i><a href="/sections/">here</a></i>
-    or create your own section <i><a href="{% url "login" %}">here</a></i>
-    <b>, but login first.</b>
+    or create your own section <i><a href="{% url "login" %}">here</a></i>,
+    <b> but login first.</b>
 </p>
 {% endif %}
 {% if amount_vehiclepart %}
@@ -43,13 +43,20 @@
     <i><b>{{ amount_vehiclepart }}</b></i>
 </p>
 {% else %}
-<p>No vehicle parts are available now.</p>
+<p>No vehicle part is available now.</p>
+{% endif %}
+{% if amount_sections %}
+<p>Amount of the sections available now:
+    <i><b>{{ amount_sections }}</b></i>
+</p>
+{% else %}
+<p>No section is available now.</p>
 {% endif %}
 {% if user.is_authenticated %}
     <p>Add your own vehicle part <i><a href="/add_vehiclepart/">here</a></i></p>
 {% else %}
-<p>Add your own vehicle part <i><a href="{% url "login" %}">here</a></i>
-    <b>, but login first.</b>
+<p>Create your own vehicle part <i><a href="{% url "login" %}">here</a></i>,
+    <b> but login first.</b>
 </p>
 {% endif %}
 <a href="{% url "logout" %}">Logout</a>

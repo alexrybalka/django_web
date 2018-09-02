@@ -32,6 +32,7 @@ def register(request):
 def index(request):
     return render(request, 'web_car/index.html', {
         'amount_vehiclepart': VehiclePart.objects.all().count(),
+        'amount_sections': Section.objects.all().count(),
     })
 
 
