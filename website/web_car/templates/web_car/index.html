@@ -13,16 +13,18 @@
 <a href="{% url "login" %}">Login</a><br>
 <a href="{% url "register" %}">Register</a>
 {% endif %}
-<p>Search here: {% include "web_car/search.html" %}</p>
+<p>Search vehicle parts below: {% include "web_car/search-vehicleparts.html" %}</p>
+<p>Search sections below: {% include "web_car/search-sections.html" %}</p>
 <h4>Description</h4>
-<h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Sed feugiat risus quis ex mattis, in sagittis augue ullamcorper.
-    Nam tincidunt feugiat tempor. Mauris imperdiet orci quam, vitae mattis arcu
-    aliquam in.
-    Duis quis varius orci, in ornare lorem. Morbi laoreet lacus sit amet nisi
-    tristique
-    imperdiet. Pellentesque pharetra sem nunc, vel luctus erat feugiat eu.
-    Nullam congue purus ut orci rhoncus, at faucibus tortor pellentesque.
+<h5>Here are:
+    <ul>
+        <li>Login & Registration</li>
+        <li>List of sections</li>
+        <li>Adding sections & vehicle parts (user add only)</li>
+        <li>Editing sections & vehicle parts (user add only and depends on which user added item)</li>
+        <li>Vehicle parts search</li>
+        <li>Vehicle parts counter</li>
+    </ul>
 </h5>
 <center><img src="https://dailym.ai/2Led0St"/></center>
 <p><i><a href="/top-priced/">[TOP 5 MOST PRICED]</a></i>

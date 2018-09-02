@@ -57,7 +57,8 @@ def add_section(request):
 def edit_section(request, section_id):
     section = get_object_or_404(Section, id=section_id)
     if request.user != section.user:
-        return HttpResponse("You can not edit section you wasn't add")
+        return HttpResponse(
+        "You can not edit section you wasn't add. Add new and try to edit it.")
     if request.method == 'POST':
         form = SectionForm(request.POST, instance=section)
         if form.is_valid():
@@ -79,7 +80,8 @@ def edit_section(request, section_id):
 def edit_vehiclepart(request, vehiclepart_id):
     vehiclepart = get_object_or_404(VehiclePart, id=vehiclepart_id)
     if request.user != vehiclepart.user:
-        return HttpResponse("You can not edit vehicle part you wasn't add")
+        return HttpResponse(
+    "You can not edit vehicle part you wasn't add. Add new and try to edit it.")
     if request.method == 'POST':
         form = VehiclePartForm(request.POST, instance=vehiclepart)
         if form.is_valid():
@@ -119,14 +121,25 @@ def add_vehiclepart(request):
     })
 
 
-def search(request):
-    if 'search' in request.GET and len(request.GET['search']):
+def search_vehicleparts(request):
+    if 'vehiclepart_search' in request.GET and len(request.GET['vehiclepart_search']):
         vehicleparts = VehiclePart.objects.filter(
-            name__contains=request.GET['search'])
+            name__contains=request.GET['vehiclepart_search'])
     else:
         return HttpResponseRedirect('/')
-    return render(request, 'web_car/results.html', {
+    return render(request, 'web_car/vehiclepart-search.html', {
         'vehicleparts': vehicleparts,
+    })
+
+
+def search_sections(request):
+    if 'section_search' in request.GET and len(request.GET['section_search']):
+        sections = Section.objects.filter(
+            name__contains=request.GET['section_search'])
+    else:
+        return HttpResponseRedirect('/')
+    return render(request, 'web_car/section-search.html', {
+        'sections': sections,
     })
 
 

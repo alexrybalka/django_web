@@ -6,13 +6,17 @@
 </head>
 <body>
 <h2><i>Vehicle parts in section {{ section_name }} available now:</i></h2>
+<p>
+    [<i><a href="/section/edit/{{ section.id }}">
+    Edit section "{{ section_name }}"</a></i>] - fix section.id here!
+</p>
 <p>[<i><a href="/add_vehiclepart/">Add your custom vehicle part</a></i>]</p>
 {% if vehiclepart_list %}
 <ul>
     {% for vehiclepart in vehiclepart_list.object_list %}
     <li>
         <b>{{ vehiclepart }}</b>
-        <a href="{% url 'edit-vehiclepart' vehiclepart.id %}">[Edit it]</a>
+        <a href="{% url 'edit-vehiclepart' vehiclepart.id %}"> [Edit]</a>
     </li>
     {% endfor %}
 </ul>

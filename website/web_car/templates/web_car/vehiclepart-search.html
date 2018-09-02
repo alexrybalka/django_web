@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Search result</title>
+    <title>Vehicle Part Search Results</title>
 </head>
 <body>
 {% if vehicleparts %}
+<h4>RESULTS:</h4>
 <ul>
     {% for vehiclepart in vehicleparts %}
     <li>
@@ -15,7 +16,8 @@
 </ul>
 {% else %}
 <p>No vehicle part founded by this search.
-    Try another search or <i><a href="/add_vehiclepart/">add here</a></i>!</p>
+    Try another search <a href="/">here</a> or <i>
+        <a href="/add_vehiclepart/">add vehicle part here</a></i>!</p>
 {% endif %}
 </body>
 </html>
