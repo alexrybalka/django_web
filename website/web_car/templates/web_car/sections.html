@@ -7,7 +7,9 @@
 <body>
 {% include "web_car/messages.html" %}
 <h2><i>List of sections available:</i></h2>
-<p>[<i><a href="/add_section/">Add your custom section</a></i>]</p>
+{% if user.is_authenticated %}
+    <p>[<i><a href="/add_section/">Add your custom section</a></i>]</p>
+{% endif %}
 {% if section_list %}
 <h4>Here you can reach your section faster:</h4>
 <ul>

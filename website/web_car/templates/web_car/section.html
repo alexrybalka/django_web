@@ -21,8 +21,14 @@
     {% endfor %}
 </ul>
 {% else %}
-<p>No vehicle part is available now. Please come tomorrow or create your own
+{% if user.is_authenticated %}
+    <p>No vehicle part is available now. Please come tomorrow or create your own
     <i><a href="/add_vehiclepart/">here</a></i>!</p>
+    {% else %}
+    <p>No vehicle part is available now. Please come tomorrow or create your own
+    <i><a href="{% url "login" %}">here</a></i>,
+        <b> but <a href="{% url "login" %}">login</a> first.</b></i></p>
+    {% endif %}
 {% endif %}
 <div>
     {% for i in paginator.page_range %}
