@@ -15,9 +15,15 @@
     {% endfor %}
 </ul>
 {% else %}
-<p>No vehicle part founded by this search.
-    Try another search <a href="/">here</a> or <i>
+<p>No vehicle part founded by this search.</p>
+{% if user.is_authenticated %}
+    <p>Try another search <a href="/">here</a> or <i>
         <a href="/add_vehiclepart/">add vehicle part here</a></i>!</p>
+{% else %}
+    <p>Try another search <a href="/">here</a> or <i>
+        <a href="{% url "login" %}">add vehicle part here</a></i>
+        <b> but <a href="{% url "login" %}">login</a></i> first.</b></p>
+{% endif %}
 {% endif %}
 </body>
 </html>
